@@ -26,40 +26,4 @@ app.get("/createpoststable", (req, res) => {
   });
 });
 
-
-
-
-app.get("/", (req, res) => {
-  let sql = "SELECT * FROM posts";
-  db.query(sql, (err, result) => {
-    if (err) throw err;
-    res.send(result);
-  });
-});
-
-app.get("/id/:id", (req, res) => {
-  let sql = `SELECT * FROM posts WHERE id = ${req.params.id}`;
-  db.query(sql, (err, result) => {
-    if (err) throw err;
-    res.send(result);
-  });
-});
-
-app.put("/id/:id", (req, res) => {
-  let newTitle = req.body.title;
-  let sql = `UPDATE posts SET title = '${newTitle}' WHERE id = ${req.params.id}`;
-  db.query(sql, (err, result) => {
-    if (err) throw err;
-    res.send("Post updated...");
-  });
-});
-
-app.delete("/id/:id", (req, res) => {
-  let sql = `DELETE FROM posts WHERE id = ${req.params.id}`;
-  db.query(sql, (err, result) => {
-    if (err) throw err;
-    res.send("Post deleted");
-  });
-});
-
 app.listen(PORT, () => console.log(`I love you ${PORT} <3`));

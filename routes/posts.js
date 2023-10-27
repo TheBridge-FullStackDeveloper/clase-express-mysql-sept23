@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
+const PostController = require("../controllers/PostController");
 const router = express.Router();
-const db = require('../config/database.js');
 // app.post("/", (req, res) => {
 //   let sql = `INSERT INTO posts (title, body) values
 //       ('${req.body.title}', '${req.body.body}');`;
@@ -10,14 +10,10 @@ const db = require('../config/database.js');
 //     res.send("Post added...");
 //   });
 // });
-router.post('/',(req,res)=>{
-    let post = {title:req.body.title, body:req.body.body};
-    let sql = 'INSERT INTO posts SET ?'
-    db.query(sql,post,(err,result)=> {
-      if(err) throw err;
-      console.log(result);
-      res.send('Post added...')
-    })
-  })
+router.post("/", PostController.create);
+router.get("/", PostController.getAll);
+router.get("/id/:id",PostController.getById);
+router.put("/id/:id", PostController.update);
+router.delete("/id/:id", PostController.delete);
 
 module.exports = router;
